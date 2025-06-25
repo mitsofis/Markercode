@@ -21,21 +21,23 @@
       "type": "image/png",
       "purpose": "any"
     },
-    
-  { "purpose": "maskable",
-    "sizes": "1024x1024",
-    "src": "/Markercode/maskable_icon.png", 
-    "type": "image/png" }, 
-
-    
-    { "purpose": "maskable",
+    {
+      "purpose": "maskable",
+      "sizes": "1024x1024",
+      "src": "/Markercode/maskable_icon.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
       "sizes": "192x192",
-      "src": "/Markercode/maskable_icon_x192.png", "type": "image/png" }, 
-   
-    { "purpose": "maskable",
+      "src": "/Markercode/maskable_icon_x192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "maskable",
       "sizes": "512x512",
-      "src": "/Markercode/maskable_icon_x512.png", 
-      "type": "image/png" }
+      "src": "/Markercode/maskable_icon_x512.png",
+      "type": "image/png"
+    }
   ]
-
 }
