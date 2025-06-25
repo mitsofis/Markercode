@@ -1,17 +1,31 @@
 {
   "name": "MarkerCode",
   "short_name": "MarkerCode",
-  "description": "A tool to copy, replace, or remove code between comment markers.",
+  "description": "A professional tool to copy, replace, or remove code between comment markers in HTML, CSS, or JavaScript, with an intuitive interface for developers.",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#4f46e5",
   "theme_color": "#4f46e5",
   "icons": [
     {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
     }
   ]
 }
