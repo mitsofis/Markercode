@@ -1,31 +1,37 @@
 {
-  "name": "MarkerCode",
-  "short_name": "MarkerCode",
-  "description": "A professional tool to copy, replace, or remove code between comment markers in HTML, CSS, or JavaScript, with an intuitive interface for developers.",
+  "name": "Markercode",
+  "short_name": "Markercode",
+  "description": "A tool to copy, replace, or remove code between comment markers in HTML, CSS, or JavaScript.",
+  "lang": "en",
   "start_url": "/Markercode/index.html",
   "scope": "/Markercode/",
   "display": "standalone",
-  "background_color": "#4f46e5",
-  "theme_color": "#4f46e5",
+  "background_color": "#ffffff",
+  "theme_color": "#317EFB",
   "icons": [
     {
       "src": "/Markercode/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      
+      "purpose": "any"
     },
     {
       "src": "/Markercode/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      
-    }
-  ],
-  "screenshots": [
+      "purpose": "any"
+    },
     {
-      "src": "/screenshot1.png",
-      "sizes": "1280x720",
-      "type": "image/png"
+      "src": "/Markercode/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Markercode/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
