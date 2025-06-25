@@ -3,7 +3,7 @@
   "short_name": "MarkerCode",
   "description": "A professional tool to copy, replace, or remove code between comment markers in HTML, CSS, or JavaScript, with an intuitive interface for developers.",
   "start_url": "/Markercode/index.html",
-  "scope": "/",
+  "scope": "/Markercode/",
   "display": "standalone",
   "background_color": "#4f46e5",
   "theme_color": "#4f46e5",
