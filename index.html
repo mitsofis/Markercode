@@ -1,9 +1,8 @@
-<br>
-<br>
 <!DOCTYPE html>
 <!-- MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0 -->
 <html lang="en">
 <head>
+  <!-- Unchanged head section -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="A professional tool to copy, replace, or remove code between comment markers." />
@@ -47,10 +46,12 @@
 
     <!-- Instructions -->
     <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
-      <h2 class="text-lg font-semibold text-gray-700 mb-2">How to Use MarkerCode</h2>
-      <button id="toggleInstructions" class="bg-gray-600 text-white px-3 py-0.5 rounded-lg hover:bg-gray-700 active:bg-gray-800 text-xs">Show Instructions</button>
+      <h2 class="text-lg font-semibold text-gray-700 mb-2 text-center">How to Use MarkerCode</h2>
+      <div class="flex justify-center">
+        <button id="toggleInstructions" class="bg-gray-600 text-white px-3 py-0.5 rounded-lg hover:bg-gray-700 active:bg-gray-800 text-xs">Show Instructions</button>
+      </div>
       <div id="instructionsContent" class="hidden mt-4">
-        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`&lt;!-- Start -- &gt;`, `&lt;!-- End -- &gt;`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
+        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`<!-- Start -- >`, `<!-- End -- >`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
         <ul class="list-disc list-inside text-sm text-gray-600">
           <li><strong>Paste Code</strong>: Enter your code in the "Input HTML / Code" section.</li>
           <li><strong>Manage Markers</strong>: Add or select start/end markers (e.g., `// Start`, `// End`) in the "Markers" section. Use "Extract Markers" to auto-detect markers.</li>
@@ -65,9 +66,9 @@
 
     <!-- Input -->
     <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
-      <label for="inputText" class="block text-sm font-medium text-gray-700 mb-2">Input HTML / Code</label>
-      <textarea id="inputText" class="w-full h-24 sm:h-32 border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Paste your full code here..."></textarea>
-      <div class="flex flex-wrap gap-3 mt-3">
+      <label for="inputText" class="block text-sm font-medium text-gray-700 mb-2 text-center">Input HTML / Code</label>
+      <textarea id="inputText" class="w-full max-w-3xl mx-auto h-24 sm:h-32 border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Paste your full code here..."></textarea>
+      <div class="flex justify-center flex-wrap gap-3 mt-3">
         <button onclick="document.getElementById('inputText').value = ''" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 active:bg-gray-800">Clear Input</button>
         <button onclick="extractMarkers()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Extract Markers</button>
       </div>
@@ -77,40 +78,40 @@
     <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label for="startMarkerSelect" class="block text-sm font-medium text-gray-700 mb-2">Start Marker</label>
-          <select id="startMarkerSelect" class="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></select>
-          <input type="text" id="startMarkerInput" class="w-full border border-gray-200 rounded-lg p-3 mt-2" placeholder="Enter new start marker (e.g., // Start)" />
-          <div class="flex flex-wrap gap-3 mt-2">
+          <label for="startMarkerSelect" class="block text-sm font-medium text-gray-700 mb-2 text-center">Start Marker</label>
+          <select id="startMarkerSelect" class="w-full max-w-xs mx-auto border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></select>
+          <input type="text" id="startMarkerInput" class="w-full max-w-xs mx-auto border border-gray-200 rounded-lg p-3 mt-2" placeholder="Enter new start marker (e.g., // Start)" />
+          <div class="flex justify-center flex-wrap gap-3 mt-2">
             <button onclick="addMarker('start')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 active:bg-gray-700">Add Start Marker</button>
             <button onclick="removeMarker('start')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 active:bg-red-800">Remove Selected</button>
           </div>
         </div>
         <div>
-          <label for="endMarkerSelect" class="block text-sm font-medium text-gray-700 mb-2">End Marker</label>
-          <select id="endMarkerSelect" class="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></select>
-          <input type="text" id="endMarkerInput" class="w-full border border-gray-200 rounded-lg p-3 mt-2" placeholder="Enter new end marker (e.g., // End)" />
-          <div class="flex flex-wrap gap-3 mt-2">
+          <label for="endMarkerSelect" class="block text-sm font-medium text-gray-700 mb-2 text-center">End Marker</label>
+          <select id="endMarkerSelect" class="w-full max-w-xs mx-auto border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></select>
+          <input type="text" id="endMarkerInput" class="w-full max-w-xs mx-auto border border-gray-200 rounded-lg p-3 mt-2" placeholder="Enter new end marker (e.g., // End)" />
+          <div class="flex justify-center flex-wrap gap-3 mt-2">
             <button onclick="addMarker('end')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 active:bg-gray-700">Add End Marker</button>
             <button onclick="removeMarker('end')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 active:bg-red-800">Remove Selected</button>
           </div>
         </div>
       </div>
-      <div class="flex justify-end mt-4">
+      <div class="flex justify-center mt-4">
         <button onclick="clearAllMarkers()" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 active:bg-yellow-800">Clear All Markers</button>
       </div>
     </div>
 
     <!-- Replacement -->
     <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
-      <label for="replacementText" class="block text-sm font-medium text-gray-700 mb-2">Replacement Content</label>
-      <textarea id="replacementText" class="w-full h-20 sm:h-24 border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter new content to replace between markers"></textarea>
-      <div class="flex flex-wrap gap-3 mt-3">
+      <label for="replacementText" class="block text-sm font-medium text-gray-700 mb-2 text-center">Replacement Content</label>
+      <textarea id="replacementText" class="w-full max-w-3xl mx-auto h-20 sm:h-24 border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter new content to replace between markers"></textarea>
+      <div class="flex justify-center flex-wrap gap-3 mt-3">
         <button onclick="document.getElementById('replacementText').value = ''" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 active:bg-gray-800">Clear Replacement</button>
       </div>
     </div>
 
     <!-- Action Buttons -->
-    <div class="flex flex-wrap gap-3 mb-6">
+    <div class="flex justify-center flex-wrap gap-3 mb-6">
       <button id="replaceBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Replace Between Markers</button>
       <button id="extractBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Copy Between Markers</button>
       <button id="removeBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Remove Between Markers</button>
@@ -118,9 +119,9 @@
 
     <!-- Output -->
     <div class="bg-white shadow-xl rounded-xl p-6">
-      <h2 class="text-lg font-semibold text-gray-700 mb-2">Output</h2>
-      <div id="output" class="w-full h-32 sm:h-40 border border-gray-200 rounded-lg p-3 bg-gray-50" tabindex="0" title="Click to select all output"></div>
-      <div class="flex flex-wrap gap-3 mt-3">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2 text-center">Output</h2>
+      <div id="output" class="w-full max-w-3xl mx-auto h-32 sm:h-40 border border-gray-200 rounded-lg p-3 bg-gray-50" tabindex="0" title="Click to select all output"></div>
+      <div class="flex justify-center flex-wrap gap-3 mt-3">
         <button id="copyBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Copy Output</button>
         <button onclick="document.getElementById('output').textContent = ''" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 active:bg-gray-800">Clear Output</button>
       </div>
@@ -134,6 +135,7 @@
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
   <script>
+    // Unchanged JavaScript section
     // MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
     const defaultMarkers = [
       '<!-- Start -->',
@@ -392,4 +394,4 @@
     }
   </script>
 </body>
-</html>
+    </html>
