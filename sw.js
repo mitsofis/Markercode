@@ -1,4 +1,5 @@
-const CACHE_NAME = 'codemarker-cache-v1';
+// MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
+const CACHE_NAME = 'markercode-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
