@@ -1,0 +1,395 @@
+<br>
+<br>
+<!DOCTYPE html>
+<!-- CodeMarker | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="A professional tool to copy, replace, or remove code between comment markers." />
+  <meta name="theme-color" content="#4f46e5" />
+  <title>CodeMarker</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    textarea, select, input {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.875rem;
+    }
+    #output {
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      overflow-y: auto;
+    }
+    .toastify {
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 0.875rem;
+      padding: 0.75rem 1rem;
+    }
+    button {
+      transition: background-color 0.2s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <div class="container mx-auto p-4 sm:p-6 max-w-4xl">
+    <header class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-indigo-800">CodeMarker</h1>
+      <span class="text-sm text-gray-500">v1.2</span>
+    </header>
+
+    <!-- Instructions -->
+    <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">How to Use CodeMarker</h2>
+      <button id="toggleInstructions" class="bg-gray-600 text-white px-3 py-0.5 rounded-lg hover:bg-gray-700 active:bg-gray-800 text-xs">Show Instructions</button>
+      <div id="instructionsContent" class="hidden mt-4">
+        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`<!-- Start -->`, `<!-- End -->`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
+        <ul class="list-disc list-inside text-sm text-gray-600">
+          <li><strong>Paste Code</strong>: Enter your code in the "Input HTML / Code" section.</li>
+          <li><strong>Manage Markers</strong>: Add or select start/end markers (e.g., `// Start`, `// End`) in the "Markers" section. Use "Extract Markers" to auto-detect markers from your code.</li>
+          <li><strong>Copy</strong>: Select markers and click "Copy Between Markers" to extract code between them to the output.</li>
+          <li><strong>Replace</strong>: Enter new content in "Replacement Content", select markers, and click "Replace Between Markers" to update the code in the output.</li>
+          <li><strong>Remove</strong>: Select markers and click "Remove Between Markers" to delete code between them in the output.</li>
+          <li><strong>Output</strong>: View results in the "Output" section. Click to select all, or use "Copy Output" to copy results.</li>
+          <li><strong>Clear</strong>: Use "Clear Input", "Clear Replacement", "Clear Output", or "Clear All Markers" to reset as needed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
+      <label for="inputText" class="block text-sm font-medium text-gray-700 mb-2">Input HTML / Code</label>
+      <textarea id="inputText" class="w-full h-24 sm:h-32 border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Paste your full code here..."></textarea>
+      <div class="flex flex-wrap gap-3 mt-3">
+        <button onclick="document.getElementById('inputText').value = ''" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 active:bg-gray-800">Clear Input</button>
+        <button onclick="extractMarkers()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Extract Markers</button>
+      </div>
+    </div>
+
+    <!-- Markers -->
+    <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="startMarkerSelect" class="block text-sm font-medium text-gray-700 mb-2">Start Marker</label>
+          <select id="startMarkerSelect" class="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></select>
+          <input type="text" id="startMarkerInput" class="w-full border border-gray-200 rounded-lg p-3 mt-2" placeholder="Enter new start marker (e.g., // Start)" />
+          <div class="flex flex-wrap gap-3 mt-2">
+            <button onclick="addMarker('start')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 active:bg-gray-700">Add Start Marker</button>
+            <button onclick="removeMarker('start')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 active:bg-red-800">Remove Selected</button>
+          </div>
+        </div>
+        <div>
+          <label for="endMarkerSelect" class="block text-sm font-medium text-gray-700 mb-2">End Marker</label>
+          <select id="endMarkerSelect" class="w-full border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></select>
+          <input type="text" id="endMarkerInput" class="w-full border border-gray-200 rounded-lg p-3 mt-2" placeholder="Enter new end marker (e.g., // End)" />
+          <div class="flex flex-wrap gap-3 mt-2">
+            <button onclick="addMarker('end')" class="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 active:bg-gray-700">Add End Marker</button>
+            <button onclick="removeMarker('end')" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 active:bg-red-800">Remove Selected</button>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end mt-4">
+        <button onclick="clearAllMarkers()" class="bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 active:bg-yellow-800">Clear All Markers</button>
+      </div>
+    </div>
+
+    <!-- Replacement -->
+    <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
+      <label for="replacementText" class="block text-sm font-medium text-gray-700 mb-2">Replacement Content</label>
+      <textarea id="replacementText" class="w-full h-20 sm:h-24 border border-gray-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Enter new content to replace between markers"></textarea>
+      <div class="flex flex-wrap gap-3 mt-3">
+        <button onclick="document.getElementById('replacementText').value = ''" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 active:bg-gray-800">Clear Replacement</button>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <button id="replaceBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Replace Between Markers</button>
+      <button id="extractBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Copy Between Markers</button>
+      <button id="removeBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Remove Between Markers</button>
+    </div>
+
+    <!-- Output -->
+    <div class="bg-white shadow-xl rounded-xl p-6">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">Output</h2>
+      <div id="output" class="w-full h-32 sm:h-40 border border-gray-200 rounded-lg p-3 bg-gray-50" tabindex="0" title="Click to select all output"></div>
+      <div class="flex flex-wrap gap-3 mt-3">
+        <button id="copyBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 active:bg-indigo-800">Copy Output</button>
+        <button onclick="document.getElementById('output').textContent = ''" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 active:bg-gray-800">Clear Output</button>
+      </div>
+    </div>
+
+    <footer class="mt-8 text-center text-gray-500 text-sm">
+      <p>© 2025 CodeMarker. Licensed under CC BY-NC 4.0. For commercial use, contact <a href="mailto:[your-email]">[your-email]</a>.</p>
+    </footer>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
+  <script>
+    // CodeMarker | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
+    const defaultMarkers = [
+      '<!-- Start -->',
+      '<!-- End -->',
+      '// Start',
+      '// End',
+      '/* Start */',
+      '/* End */'
+    ];
+
+    const markerStorage = {
+      start: JSON.parse(localStorage.getItem('startMarkers')) || defaultMarkers.filter((_, i) => i % 2 === 0),
+      end: JSON.parse(localStorage.getItem('endMarkers')) || defaultMarkers.filter((_, i) => i % 2 !== 0)
+    };
+
+    function showToast(message, type = 'info') {
+      try {
+        Toastify({
+          text: message,
+          duration: 3000,
+          gravity: 'bottom',
+          position: 'right',
+          backgroundColor: type === 'error' ? '#dc2626' : type === 'success' ? '#14b8a6' : '#4f46e5',
+          className: 'toastify'
+        }).showToast();
+      } catch (e) {
+        console.error('Toastify error:', e);
+      }
+    }
+
+    function updateMarkerSelect(type) {
+      try {
+        const select = document.getElementById(`${type}MarkerSelect`);
+        if (!select) throw new Error(`Select element ${type}MarkerSelect not found`);
+        select.innerHTML = '<option value="">Select a marker</option>';
+        markerStorage[type].forEach(marker => {
+          const option = document.createElement('option');
+          option.value = marker;
+          option.textContent = marker;
+          select.appendChild(option);
+        });
+      } catch (e) {
+        console.error(`Error updating ${type} marker select:`, e);
+        showToast(`Failed to update ${type} markers`, 'error');
+      }
+    }
+
+    function addMarker(type) {
+      try {
+        const input = document.getElementById(`${type}MarkerInput`);
+        const value = input.value.trim();
+        if (!value) return showToast(`${type} marker cannot be empty`, 'error');
+        if (markerStorage[type].includes(value)) return showToast(`${type} marker already exists`, 'error');
+        markerStorage[type].push(value);
+        localStorage.setItem(`${type}Markers`, JSON.stringify(markerStorage[type]));
+        input.value = '';
+        updateMarkerSelect(type);
+        showToast(`Added ${type} marker: ${value}`, 'success');
+      } catch (e) {
+        console.error(`Error adding ${type} marker:`, e);
+        showToast(`Failed to add ${type} marker`, 'error');
+      }
+    }
+
+    function removeMarker(type) {
+      try {
+        const select = document.getElementById(`${type}MarkerSelect`);
+        const selected = select.value;
+        if (!selected) return showToast(`Please select a ${type} marker to remove`, 'error');
+        const index = markerStorage[type].indexOf(selected);
+        if (index !== -1) {
+          markerStorage[type].splice(index, 1);
+          localStorage.setItem(`${type}Markers`, JSON.stringify(markerStorage[type]));
+          updateMarkerSelect(type);
+          showToast(`Removed ${type} marker: ${selected}`, 'success');
+        }
+      } catch (e) {
+        console.error(`Error removing ${type} marker:`, e);
+        showToast(`Failed to remove ${type} marker`, 'error');
+      }
+    }
+
+    function clearAllMarkers() {
+      try {
+        if (!confirm('Are you sure you want to clear all markers? This action cannot be undone.')) return;
+        markerStorage.start = [];
+        markerStorage.end = [];
+        localStorage.setItem('startMarkers', JSON.stringify(markerStorage.start));
+        localStorage.setItem('endMarkers', JSON.stringify(markerStorage.end));
+        updateMarkerSelect('start');
+        updateMarkerSelect('end');
+        showToast('All markers cleared', 'success');
+      } catch (e) {
+        console.error('Error clearing all markers:', e);
+        showToast('Failed to clear markers', 'error');
+      }
+    }
+
+    function extractMarkers() {
+      try {
+        const input = document.getElementById('inputText').value;
+        if (!input.trim()) return showToast('Input is empty', 'error');
+        const markerRegex = /<!--\s*(.*?)\s*-->|\/\/\s*([^\n]+)|\/\*\s*(.*?)\s*\*\//g;
+        let match;
+        const newStart = new Set();
+        const newEnd = new Set();
+        while ((match = markerRegex.exec(input)) !== null) {
+          const content = match[1] || match[2] || match[3];
+          const marker = match[0].trim();
+          if (/end/i.test(content)) newEnd.add(marker);
+          else newStart.add(marker);
+        }
+        markerStorage.start = [...new Set([...markerStorage.start, ...newStart])];
+        markerStorage.end = [...new Set([...markerStorage.end, ...newEnd])];
+        localStorage.setItem('startMarkers', JSON.stringify(markerStorage.start));
+        localStorage.setItem('endMarkers', JSON.stringify(markerStorage.end));
+        updateMarkerSelect('start');
+        updateMarkerSelect('end');
+        showToast('Markers extracted', 'success');
+      } catch (e) {
+        console.error('Error extracting markers:', e);
+        showToast('Failed to extract markers', 'error');
+      }
+    }
+
+    function getSelectedMarker(type) {
+      try {
+        const select = document.getElementById(`${type}MarkerSelect`);
+        return select.value;
+      } catch (e) {
+        console.error(`Error getting ${type} marker:`, e);
+        return '';
+      }
+    }
+
+    function escapeRegex(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Toggle Instructions
+    document.getElementById('toggleInstructions').addEventListener('click', () => {
+      try {
+        const content = document.getElementById('instructionsContent');
+        const button = document.getElementById('toggleInstructions');
+        if (content.classList.contains('hidden')) {
+          content.classList.remove('hidden');
+          button.textContent = 'Hide Instructions';
+        } else {
+          content.classList.add('hidden');
+          button.textContent = 'Show Instructions';
+        }
+      } catch (e) {
+        console.error('Error toggling instructions:', e);
+        showToast('Failed to toggle instructions', 'error');
+      }
+    });
+
+    document.getElementById('replaceBtn').addEventListener('click', () => {
+      try {
+        const input = document.getElementById('inputText').value;
+        const start = getSelectedMarker('start');
+        const end = getSelectedMarker('end');
+        const replacement = document.getElementById('replacementText').value;
+        if (!start || !end) return showToast('Select both markers', 'error');
+        const regex = new RegExp(`(${escapeRegex(start)})([\\s\\S]*?)(${escapeRegex(end)})`, 'g');
+        const clean = replacement.replace(new RegExp(`^\\s*${escapeRegex(start)}\\s*`), '').replace(new RegExp(`\\s*${escapeRegex(end)}\\s*$`), '');
+        const result = input.replace(regex, `$1\n${clean}\n$3`);
+        document.getElementById('output').textContent = result;
+        showToast('Content replaced', 'success');
+      } catch (e) {
+        console.error('Error replacing content:', e);
+        showToast('Failed to replace content', 'error');
+      }
+    });
+
+    document.getElementById('extractBtn').addEventListener('click', () => {
+      try {
+        const input = document.getElementById('inputText').value;
+        const start = getSelectedMarker('start');
+        const end = getSelectedMarker('end');
+        const regex = new RegExp(`${escapeRegex(start)}([\\s\\S]*?)${escapeRegex(end)}`, 'g');
+        const match = regex.exec(input);
+        if (match && match[1]) {
+          const text = match[1].trim();
+          document.getElementById('output').textContent = text;
+          navigator.clipboard.writeText(text);
+          showToast('Copied content', 'success');
+        } else {
+          showToast('Markers not found', 'error');
+        }
+      } catch (e) {
+        console.error('Error extracting content:', e);
+        showToast('Failed to extract content', 'error');
+      }
+    });
+
+    document.getElementById('removeBtn').addEventListener('click', () => {
+      try {
+        const input = document.getElementById('inputText').value;
+        const start = getSelectedMarker('start');
+        const end = getSelectedMarker('end');
+        const regex = new RegExp(`${escapeRegex(start)}([\\s\\S]*?)${escapeRegex(end)}`, 'g');
+        const result = input.replace(regex, `${start}\n${end}`);
+        document.getElementById('output').textContent = result;
+        showToast('Content removed', 'success');
+      } catch (e) {
+        console.error('Error removing content:', e);
+        showToast('Failed to remove content', 'error');
+      }
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      try {
+        const text = document.getElementById('output').textContent;
+        if (!text.trim()) return showToast('Nothing to copy', 'error');
+        navigator.clipboard.writeText(text).then(() => showToast('Output copied', 'success'));
+      } catch (e) {
+        console.error('Error copying output:', e);
+        showToast('Failed to copy output', 'error');
+      }
+    });
+
+    document.getElementById('output').addEventListener('click', function () {
+      try {
+        const range = document.createRange();
+        range.selectNodeContents(this);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } catch (e) {
+        console.error('Error selecting output text:', e);
+      }
+    });
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service Worker registered with scope:', registration.scope);
+          })
+          .catch(error => {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+    }
+
+    // Initialize marker selects
+    try {
+      updateMarkerSelect('start');
+      updateMarkerSelect('end');
+      console.log('Add buttons loaded');
+    } catch (e) {
+      console.error('Initialization error:', e);
+      showToast('Failed to initialize markers', 'error');
+    }
+  </script>
+</body>
+</html>

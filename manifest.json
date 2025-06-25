@@ -1,0 +1,17 @@
+{
+  "name": "MarkerCode",
+  "short_name": "MarkerCode",
+  "description": "A tool to copy, replace, or remove code between comment markers.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#4f46e5",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
