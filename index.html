@@ -1,14 +1,14 @@
 <br>
 <br>
 <!DOCTYPE html>
-<!-- CodeMarker | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0 -->
+<!-- MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="A professional tool to copy, replace, or remove code between comment markers." />
   <meta name="theme-color" content="#4f46e5" />
-  <title>CodeMarker</title>
+  <title>MarkerCode</title>
   <link rel="manifest" href="/manifest.json" />
   <link rel="apple-touch-icon" href="/icon.png" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
@@ -41,24 +41,24 @@
 <body class="bg-gray-100 min-h-screen flex flex-col">
   <div class="container mx-auto p-4 sm:p-6 max-w-4xl">
     <header class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl sm:text-3xl font-bold text-indigo-800">CodeMarker</h1>
+      <h1 class="text-2xl sm:text-3xl font-bold text-indigo-800">MarkerCode</h1>
       <span class="text-sm text-gray-500">v1.2</span>
     </header>
 
     <!-- Instructions -->
     <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
-      <h2 class="text-lg font-semibold text-gray-700 mb-2">How to Use CodeMarker</h2>
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">How to Use MarkerCode</h2>
       <button id="toggleInstructions" class="bg-gray-600 text-white px-3 py-0.5 rounded-lg hover:bg-gray-700 active:bg-gray-800 text-xs">Show Instructions</button>
       <div id="instructionsContent" class="hidden mt-4">
-        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`<!-- Start -->`, `<!-- End -->`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
+        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`&lt;!-- Start -- &gt;`, `&lt;!-- End -- &gt;`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
         <ul class="list-disc list-inside text-sm text-gray-600">
           <li><strong>Paste Code</strong>: Enter your code in the "Input HTML / Code" section.</li>
-          <li><strong>Manage Markers</strong>: Add or select start/end markers (e.g., `// Start`, `// End`) in the "Markers" section. Use "Extract Markers" to auto-detect markers from your code.</li>
-          <li><strong>Copy</strong>: Select markers and click "Copy Between Markers" to extract code between them to the output.</li>
-          <li><strong>Replace</strong>: Enter new content in "Replacement Content", select markers, and click "Replace Between Markers" to update the code in the output.</li>
-          <li><strong>Remove</strong>: Select markers and click "Remove Between Markers" to delete code between them in the output.</li>
-          <li><strong>Output</strong>: View results in the "Output" section. Click to select all, or use "Copy Output" to copy results.</li>
-          <li><strong>Clear</strong>: Use "Clear Input", "Clear Replacement", "Clear Output", or "Clear All Markers" to reset as needed.</li>
+          <li><strong>Manage Markers</strong>: Add or select start/end markers (e.g., `// Start`, `// End`) in the "Markers" section. Use "Extract Markers" to auto-detect markers.</li>
+          <li><strong>Copy</strong>: Select markers and click "Copy Between Markers" to extract code.</li>
+          <li><strong>Replace</strong>: Enter new content in "Replacement Content", select markers, and click "Replace Between Markers".</li>
+          <li><strong>Remove</strong>: Select markers and click "Remove Between Markers" to delete code.</li>
+          <li><strong>Output</strong>: View results in the "Output" section. Click to select all or use "Copy Output".</li>
+          <li><strong>Clear</strong>: Use "Clear Input", "Clear Replacement", "Clear Output", or "Clear All Markers" to reset.</li>
         </ul>
       </div>
     </div>
@@ -126,15 +126,15 @@
       </div>
     </div>
 
-    <footer class="mt-8 text-center text-gray-500 text-sm">
-      <p>© 2025 CodeMarker. Licensed under CC BY-NC 4.0. For commercial use, contact <a href="mailto:[your-email]">[your-email]</a>.</p>
+    <footer class="mt-10 text-center text-gray-700 text-sm">
+      <p>© 2025 MarkerCode. Licensed under CC BY-NC 4.0. For commercial use, contact <a href="mailto:[your-email]" class="text-indigo-600 underline hover:text-indigo-700">[your-email]</a>. | <a href="/privacy.html" class="text-indigo-600 underline hover:text-indigo-700">Privacy Policy</a></p>
     </footer>
   </div>
 
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
   <script>
-    // CodeMarker | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
+    // MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
     const defaultMarkers = [
       '<!-- Start -->',
       '<!-- End -->',
