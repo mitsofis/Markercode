@@ -39,5 +39,22 @@
       "src": "/Markercode/maskable_icon_x512.png",
       "type": "image/png"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "/Markercode/screenshot-1.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/Markercode/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/Markercode/screenshot-3.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
   ]
 }
