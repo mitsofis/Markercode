@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<!-- MarkerCode | Copyright © 2025 mitsof. Licensed under the MarkerCode License. -->
+<!-- MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="A professional tool to copy, replace, or remove code between comment markers." />
   <meta name="theme-color" content="#4f46e5" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Markercode</title>
-  <link rel="manifest" href="/Markercode/manifest.json?v=10" />
-  <link rel="icon" href="/Markercode/icon-512.png"?v=³/>
+  <title>MarkerCode</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icon-512.png" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css" rel="stylesheet" />
   <style>
     body {
@@ -36,23 +35,66 @@
     button {
       transition: background-color 0.2s ease-in-out;
     }
+    .support-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #f9fafb;
+      border-radius: 0.5rem;
+      max-width: 800px;
+      min-height: 150px; /* Ensures enough space for vertical centering */
+    }
+    .support-section p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 1rem;
+      letter-spacing: 0.025rem;
+      text-align: center;
+    }
+    .coffee-button img {
+      width: 180px;
+      max-height: 48px;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+    .coffee-button img:hover {
+      transform: scale(1.1);
+    }
+    @media (max-width: 600px) {
+      .support-section p {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      .coffee-button img {
+        width: 150px;
+        max-height: 40px;
+      }
+      .support-section {
+        min-height: 120px; /* Adjusted for smaller screens */
+      }
+    }
   </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
   <div class="container mx-auto p-4 sm:p-6 max-w-4xl">
     <header class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl sm:text-3xl font-bold text-indigo-800">Markercode</h1>
+      <h1 class="text-2xl sm:text-3xl font-bold text-indigo-800">MarkerCode</h1>
       <span class="text-sm text-gray-500">v1.2</span>
     </header>
 
     <!-- Instructions -->
     <div class="bg-white shadow-xl rounded-xl p-6 mb-6">
-      <h2 class="text-lg font-semibold text-gray-700 mb-2 text-center">How to Use Markercode</h2>
+      <h2 class="text-lg font-semibold text-gray-700 mb-2 text-center">How to Use MarkerCode</h2>
       <div class="flex justify-center">
         <button id="toggleInstructions" class="bg-gray-600 text-white px-3 py-0.5 rounded-lg hover:bg-gray-700 active:bg-gray-800 text-xs">Show Instructions</button>
       </div>
       <div id="instructionsContent" class="hidden mt-4">
-        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`&lt;!-- Start -- &gt;`, `&lt;!-- End -- &gt;`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
+        <p class="text-sm text-gray-600 mb-2">This app lets you copy, replace, or remove code between start and end comment markers, such as HTML (`<!-- Start -->`, `<!-- End -->`), CSS (`/* Start */`, `/* End */`), or JavaScript (`// Start`, `// End`).</p>
         <ul class="list-disc list-inside text-sm text-gray-600">
           <li><strong>Paste Code</strong>: Enter your code in the "Input HTML / Code" section.</li>
           <li><strong>Manage Markers</strong>: Add or select start/end markers (e.g., `// Start`, `// End`) in the "Markers" section. Use "Extract Markers" to auto-detect markers.</li>
@@ -127,16 +169,24 @@
       </div>
     </div>
 
+    <!-- Support Section -->
+    <div class="support-section">
+      <p>A ☕ a day keeps<br>ads at bay!</p>
+      <a href="https://coff.ee/qifsharobtg" target="_blank" class="coffee-button">
+        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee">
+      </a>
+    </div>
+
     <!-- Footer -->
     <footer class="mt-10 text-center text-gray-700 text-sm">
-      <p>MarkerCode | Copyright © 2025 mitsof. Licensed under the MarkerCode License. For commercial use, contact <a href="mailto:glossesweb@gmail.com" class="text-indigo-600 underline hover:text-indigo-700">glossesweb@gmail.com</a>. | <a href="/Markercode/privacy.html" class="text-indigo-600 underline hover:text-indigo-700">Privacy Policy</a></p>
+      <p>© 2025 MarkerCode. Licensed under CC BY-NC 4.0. For commercial use, contact <a href="mailto:glossesweb@gmail.com" class="text-indigo-600 underline hover:text-indigo-700">glossesweb@gmail.com</a>. | <a href="/privacy.html" class="text-indigo-600 underline hover:text-indigo-700">Privacy Policy</a></p>
     </footer>
   </div>
 
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
   <script>
-    // MarkerCode | Copyright © 2025 mitsof. Licensed under the MarkerCode License.
+    // MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
     const defaultMarkers = [
       '<!-- Start -->',
       '<!-- End -->',
@@ -394,4 +444,4 @@
     }
   </script>
 </body>
-    </html>
+</html>
