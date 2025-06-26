@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0 -->
+<!-- MarkerCode | Copyright © 2025 mitsof. Licensed under the MarkerCode License. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -40,42 +40,54 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background-color: #f9fafb;
-      border-radius: 0.5rem;
+      margin: 2.5rem auto;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+      border: 1px solid #d1d5db;
+      border-radius: 0.75rem;
       max-width: 800px;
-      min-height: 150px; /* Ensures enough space for vertical centering */
+      min-height: 160px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 1s ease-in-out;
     }
     .support-section p {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.6rem;
+      font-weight: 700;
       color: #1f2937;
-      margin-bottom: 1rem;
-      letter-spacing: 0.025rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.03rem;
       text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     .coffee-button img {
-      width: 180px;
-      max-height: 48px;
+      width: 200px;
+      max-height: 50px;
       height: auto;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 0.25rem;
     }
     .coffee-button img:hover {
       transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
     @media (max-width: 600px) {
+      .support-section {
+        padding: 1.5rem;
+        min-height: 130px;
+      }
       .support-section p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 600;
       }
       .coffee-button img {
-        width: 150px;
-        max-height: 40px;
-      }
-      .support-section {
-        min-height: 120px; /* Adjusted for smaller screens */
+        width: 160px;
+        max-height: 42px;
       }
     }
   </style>
@@ -179,14 +191,14 @@
 
     <!-- Footer -->
     <footer class="mt-10 text-center text-gray-700 text-sm">
-      <p>© 2025 MarkerCode. Licensed under CC BY-NC 4.0. For commercial use, contact <a href="mailto:glossesweb@gmail.com" class="text-indigo-600 underline hover:text-indigo-700">glossesweb@gmail.com</a>. | <a href="/privacy.html" class="text-indigo-600 underline hover:text-indigo-700">Privacy Policy</a></p>
+      <p>MarkerCode | Copyright © 2025 mitsof. Licensed under the MarkerCode License. For commercial use, contact <a href="mailto:glossesweb@gmail.com" class="text-indigo-600 underline hover:text-indigo-700">glossesweb@gmail.com</a>. | <a href="/privacy.html" class="text-indigo-600 underline hover:text-indigo-700">Privacy Policy</a></p>
     </footer>
   </div>
 
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
   <script>
-    // MarkerCode | Copyright (c) 2025 mitsof | Licensed under CC BY-NC 4.0
+    // MarkerCode | Copyright © 2025 mitsof. Licensed under the MarkerCode License.
     const defaultMarkers = [
       '<!-- Start -->',
       '<!-- End -->',
